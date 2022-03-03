@@ -11,13 +11,3 @@ export default function ListItem({ item, deleteItem }) {
     </li>
   );
 }
-
-/*
-<li
-            key={item._id}
-            className="List-Item"
-            onClick={() => onDeleteItem(item._id)}
-          >
-            {item.name.en}
-          </li>
-          */
