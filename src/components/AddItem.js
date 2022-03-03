@@ -1,15 +1,18 @@
+import "./AddItem.css";
 import { useState } from "react";
 
 export default function AddItem({ onAddItem }) {
   const [title, setTitle] = useState("");
   return (
-    <>
+    <div className="Add">
       <input
+        className="Add-Input"
         placeholder="Add Item"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(event) => setTitle(event.target.value)}
       />
       <button
+        className="Add-Item-Button"
         onClick={() => {
           setTitle("");
           onAddItem(title);
@@ -17,6 +20,6 @@ export default function AddItem({ onAddItem }) {
       >
         Add
       </button>
-    </>
+    </div>
   );
 }

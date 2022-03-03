@@ -28,9 +28,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <List items={items} className="List" onDeleteItem={handleDeleteItem} />
       <p className="App-Text">What do you want to buy?:</p>
       <AddItem onAddItem={handleAddItem} />
+      <List items={items} className="List" onDeleteItem={handleDeleteItem} />
     </div>
   );
 }
