@@ -1,0 +1,11 @@
+.List-Item {
+  font-size: medium;
+  background-color: rgba(181, 254, 254, 0.5);
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.List-Item:hover {
+  cursor: pointer;
+}
