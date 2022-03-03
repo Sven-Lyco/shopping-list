@@ -1,14 +1,21 @@
 import "./List.css";
 
-import ListItem from "./ListItem";
-import DataBase from "../db";
-
-export default function List() {
+export default function List({ items, onDeleteItem }) {
   return (
     <ul className="List">
-      {DataBase.map((data) => {
-        return <ListItem key={data.id} itemName={data} />;
+      {items.map((item) => {
+        return (
+          <li
+            key={item._id}
+            className="List-Item"
+            onClick={() => onDeleteItem(item._id)}
+          >
+            {item.name.en}
+          </li>
+        );
       })}
     </ul>
   );
 }
+
+//<ListItem key={data._id} name={data.name.en} />

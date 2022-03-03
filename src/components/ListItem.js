@@ -1,6 +1,5 @@
 import "./ListItem.css";
 
-export default function ListItem({ itemName }) {
-  console.log(itemName.name.en);
-  return <button className="List-Item">{itemName.name.en}</button>;
+export default function ListItem({ name }) {
+  return <li className="List-Item">{name}</li>;
 }
