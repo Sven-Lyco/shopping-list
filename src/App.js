@@ -5,8 +5,7 @@ import Header from "./components/Header";
 import List from "./components/List";
 import AddItem from "./components/AddItem";
 import { useState } from "react";
-
-let nextId = 1;
+import { nanoid } from "nanoid";
 
 function App() {
   const [items, setItems] = useState(DataBase);
@@ -17,7 +16,7 @@ function App() {
 
   function handleAddItem(title) {
     const newItem = {
-      _id: `c2hvcHBpbmcuaXRlbTo1${nextId++}`,
+      _id: nanoid(),
       _type: "shopping.item",
       category: { _type: "ref", _ref: "c2hvcHBpbmcuY2F0ZWdvcnk6MA==" },
       name: { en: title, de: "" },
