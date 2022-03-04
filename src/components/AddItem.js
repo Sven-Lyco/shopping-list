@@ -23,6 +23,7 @@ export default function AddItem({ onAddItem }) {
         value={title}
         onChange={(event) => setTitle(event.target.value)}
       />
+      <button>Add</button>
     </form>
   );
 }

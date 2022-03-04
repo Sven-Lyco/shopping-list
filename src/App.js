@@ -1,6 +1,5 @@
 import "./App.css";
 import "./components/List.css";
-import DataBase from "./db";
 import Header from "./components/Header";
 import List from "./components/List";
 import AddItem from "./components/AddItem";
@@ -9,24 +8,24 @@ import { nanoid } from "nanoid";
 
 function App() {
   const [shoppingList, setShoppingList] = useState(
-    loadFromLocal("items") ?? DataBase
+    loadFromLocal("items") ?? []
   );
-  const [apfel7, setApfel7] = useState([]);
+  const [apiURL, setApiURL] = useState(
+    "https://fetch-me.vercel.app/api/shopping/items"
+  );
 
   useEffect(() => {
     async function loadNewItems() {
       try {
-        const response = await fetch(
-          "https://fetch-me.vercel.app/api/shopping/items"
-        );
+        const response = await fetch(apiURL);
         const data = await response.json();
-        setApfel7(data);
+        setApiURL(data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
     loadNewItems();
-  }, []);
+  }, [apiURL]);
 
   useEffect(() => {
     saveToLocal("items", shoppingList);
@@ -47,6 +46,8 @@ function App() {
   function handleDeleteItem(ItemId) {
     setShoppingList(shoppingList.filter((item) => item._id !== ItemId));
   }
+
+  console.log(shoppingList);
 
   function handleAddItem(name) {
     const newItem = {
