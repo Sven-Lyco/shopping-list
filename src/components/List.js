@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import "./List.css";
 import ListItem from "./ListItem";
 

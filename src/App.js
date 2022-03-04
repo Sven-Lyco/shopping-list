@@ -8,11 +8,29 @@ import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 
 function App() {
-  const [items, setItems] = useState(loadFromLocal("items") ?? DataBase);
+  const [shoppingList, setShoppingList] = useState(
+    loadFromLocal("items") ?? DataBase
+  );
+  const [apfel7, setApfel7] = useState([]);
 
   useEffect(() => {
-    saveToLocal("items", items);
-  }, [items]);
+    async function loadNewItems() {
+      try {
+        const response = await fetch(
+          "https://fetch-me.vercel.app/api/shopping/items"
+        );
+        const data = await response.json();
+        setApfel7(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    loadNewItems();
+  }, []);
+
+  useEffect(() => {
+    saveToLocal("items", shoppingList);
+  }, [shoppingList]);
 
   function loadFromLocal(key) {
     try {
@@ -27,7 +45,7 @@ function App() {
   }
 
   function handleDeleteItem(ItemId) {
-    setItems(items.filter((item) => item._id !== ItemId));
+    setShoppingList(shoppingList.filter((item) => item._id !== ItemId));
   }
 
   function handleAddItem(name) {
@@ -37,13 +55,17 @@ function App() {
       category: { _type: "ref", _ref: "c2hvcHBpbmcuY2F0ZWdvcnk6MA==" },
       name: { en: name, de: "" },
     };
-    setItems([...items, newItem]);
+    setShoppingList([...shoppingList, newItem]);
   }
 
   return (
     <div className="App">
       <Header />
-      <List className="List" items={items} onDeleteItem={handleDeleteItem} />
+      <List
+        className="List"
+        items={shoppingList}
+        onDeleteItem={handleDeleteItem}
+      />
       <AddItem onAddItem={handleAddItem} />
     </div>
   );
