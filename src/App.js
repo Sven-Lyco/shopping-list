@@ -4,11 +4,27 @@ import DataBase from "./db";
 import Header from "./components/Header";
 import List from "./components/List";
 import AddItem from "./components/AddItem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 
 function App() {
-  const [items, setItems] = useState(DataBase);
+  const [items, setItems] = useState(loadFromLocal("items") ?? DataBase);
+
+  useEffect(() => {
+    saveToLocal("items", items);
+  }, [items]);
+
+  function loadFromLocal(key) {
+    try {
+      return JSON.parse(localStorage.getItem(key));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function saveToLocal(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
 
   function handleDeleteItem(ItemId) {
     setItems(items.filter((item) => item._id !== ItemId));
