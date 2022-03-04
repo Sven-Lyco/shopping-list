@@ -10,21 +10,22 @@ function App() {
   const [shoppingList, setShoppingList] = useState(
     loadFromLocal("items") ?? []
   );
+  const [shoppingItems, setShoppingItems] = useState([]);
   const [apiURL, setApiURL] = useState(
     "https://fetch-me.vercel.app/api/shopping/items"
   );
 
   useEffect(() => {
-    async function loadNewItems() {
+    loadShoppingItems();
+    async function loadShoppingItems() {
       try {
         const response = await fetch(apiURL);
         const data = await response.json();
-        setApiURL(data);
+        setShoppingItems(data.data);
       } catch (error) {
         console.error(error);
       }
     }
-    loadNewItems();
   }, [apiURL]);
 
   useEffect(() => {
@@ -47,8 +48,6 @@ function App() {
     setShoppingList(shoppingList.filter((item) => item._id !== ItemId));
   }
 
-  console.log(shoppingList);
-
   function handleAddItem(name) {
     const newItem = {
       _id: nanoid(),
@@ -68,6 +67,11 @@ function App() {
         onDeleteItem={handleDeleteItem}
       />
       <AddItem onAddItem={handleAddItem} />
+      <ul>
+        {shoppingItems.map((item) => (
+          <li key={item._id}>{item.name.en}</li>
+        ))}
+      </ul>
     </div>
   );
 }
