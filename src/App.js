@@ -30,7 +30,7 @@ function App() {
       <Header />
       <p className="App-Text">What do you want to buy?:</p>
       <AddItem onAddItem={handleAddItem} />
-      <List items={items} className="List" onDeleteItem={handleDeleteItem} />
+      <List className="List" items={items} onDeleteItem={handleDeleteItem} />
     </div>
   );
 }

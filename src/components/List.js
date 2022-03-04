@@ -6,12 +6,7 @@ export default function List({ items, onDeleteItem }) {
     <ul className="List">
       {items.map((item) => {
         return (
-          <ListItem
-            item={item}
-            key={item._id}
-            name={item.name.en}
-            deleteItem={onDeleteItem}
-          />
+          <ListItem item={item} key={item._id} deleteItem={onDeleteItem} />
         );
       })}
     </ul>
