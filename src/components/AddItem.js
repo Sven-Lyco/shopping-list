@@ -8,6 +8,7 @@ export default function AddItem({ onAddItem }) {
       <label htmlFor="add-item">
         <p className="App-Text">What do you want to buy?:</p>
         <input
+          required
           id="add-item"
           className="Add-Input"
           type="text"
