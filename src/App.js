@@ -28,7 +28,6 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <p className="App-Text">What do you want to buy?:</p>
       <AddItem onAddItem={handleAddItem} />
       <List className="List" items={items} onDeleteItem={handleDeleteItem} />
     </div>

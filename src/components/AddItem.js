@@ -4,13 +4,18 @@ import { useState } from "react";
 export default function AddItem({ onAddItem }) {
   const [title, setTitle] = useState("");
   return (
-    <div className="Add">
-      <input
-        className="Add-Input"
-        placeholder="Add Item"
-        value={title}
-        onChange={(event) => setTitle(event.target.value)}
-      />
+    <form action="#">
+      <label htmlFor="add-item">
+        <p className="App-Text">What do you want to buy?:</p>
+        <input
+          id="add-item"
+          className="Add-Input"
+          type="text"
+          placeholder="Add Item"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+      </label>
       <button
         className="Add-Item-Button"
         onClick={() => {
@@ -20,6 +25,6 @@ export default function AddItem({ onAddItem }) {
       >
         Add
       </button>
-    </div>
+    </form>
   );
 }
