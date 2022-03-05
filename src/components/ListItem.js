@@ -1,8 +1,8 @@
-import "./ListItem.css";
+import "./listitem.css";
 
 export default function ListItem({ item, deleteItem }) {
   return (
-    <li className="List-Item" onClick={() => deleteItem(item._id)}>
+    <li className="list-item" onClick={() => deleteItem(item._id)}>
       {item.name.en}
     </li>
   );

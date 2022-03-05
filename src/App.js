@@ -1,8 +1,10 @@
-import "./App.css";
-import "./components/List.css";
+import "./app.css";
+import "./components/list.css";
 import Header from "./components/Header";
 import List from "./components/List";
 import AddItem from "./components/AddItem";
+import SearchBar from "./components/SearchBar";
+import SearchListItems from "./components/SearchListItems";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 
@@ -59,19 +61,16 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="app">
       <Header />
       <List
-        className="List"
+        className="list"
         items={shoppingList}
         onDeleteItem={handleDeleteItem}
       />
       <AddItem onAddItem={handleAddItem} />
-      <ul>
-        {shoppingItems.map((item) => (
-          <li key={item._id}>{item.name.en}</li>
-        ))}
-      </ul>
+      <SearchBar />
+      <SearchListItems items={shoppingItems} />
     </div>
   );
 }
