@@ -7,6 +7,7 @@ import SearchBar from "./components/SearchBar";
 import SearchListItems from "./components/SearchListItems";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
+const { search } = require("fast-fuzzy");
 
 function App() {
   const [shoppingList, setShoppingList] = useState(
@@ -59,6 +60,8 @@ function App() {
     };
     setShoppingList([...shoppingList, newItem]);
   }
+
+  console.log(search("abc", ["def", "bcd", "cde", "abc"]));
 
   return (
     <div className="app">
