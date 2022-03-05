@@ -62,7 +62,7 @@ function App() {
     setShoppingList([...shoppingList, newSearchedItem]);
   }
 
-  /*function handleAddItem(name) {
+  function handleAddItem(name) {
     const newItem = {
       _id: nanoid(),
       _type: "shopping.item",
@@ -70,13 +70,13 @@ function App() {
       name: { en: name, de: "" },
     };
     setShoppingList([...shoppingList, newItem]);
-  }*/
+  }
 
   return (
     <div className="app">
       <Header />
       <List className="list" items={shoppingList} onDeleteItem={handleDeleteItem} />
-      {/*<AddItem onAddItem={handleAddItem} />*/}
+      <AddItem onAddItem={handleAddItem} />
       <SearchBar handleSearch={setSearchTerm} />
       {searchTerm && (
         <SearchListItems
