@@ -7,29 +7,29 @@ import SearchBar from "./components/SearchBar";
 import SearchListItems from "./components/SearchListItems";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
-const { search } = require("fast-fuzzy");
+
+import "./components/searchbar.css";
+import "./components/searchlistitems.css";
+
+//const { search } = require("fast-fuzzy");
 
 function App() {
-  const [shoppingList, setShoppingList] = useState(
-    loadFromLocal("items") ?? []
-  );
+  const [shoppingList, setShoppingList] = useState(loadFromLocal("items") ?? []);
+  const [searchTerm, setSearchTerm] = useState("");
   const [shoppingItems, setShoppingItems] = useState([]);
-  const [apiURL, setApiURL] = useState(
-    "https://fetch-me.vercel.app/api/shopping/items"
-  );
 
   useEffect(() => {
     loadShoppingItems();
     async function loadShoppingItems() {
       try {
-        const response = await fetch(apiURL);
+        const response = await fetch("https://fetch-me.vercel.app/api/shopping/items");
         const data = await response.json();
         setShoppingItems(data.data);
       } catch (error) {
         console.error(error);
       }
     }
-  }, [apiURL]);
+  }, []);
 
   useEffect(() => {
     saveToLocal("items", shoppingList);
@@ -61,21 +61,17 @@ function App() {
     setShoppingList([...shoppingList, newItem]);
   }
 
-  console.log(search("abc", ["def", "bcd", "cde", "abc"]));
-
   return (
     <div className="app">
       <Header />
-      <List
-        className="list"
-        items={shoppingList}
-        onDeleteItem={handleDeleteItem}
-      />
+      <List className="list" items={shoppingList} onDeleteItem={handleDeleteItem} />
       <AddItem onAddItem={handleAddItem} />
-      <SearchBar />
-      <SearchListItems items={shoppingItems} />
+      <SearchBar handleSearch={setSearchTerm} />
+      <SearchListItems searchInput={searchTerm} items={shoppingItems} />
     </div>
   );
 }
 
 export default App;
+
+//
