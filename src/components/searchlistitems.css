@@ -14,3 +14,7 @@
   border-radius: 5px;
   padding: 3px;
 }
+
+.search-list-item:hover {
+  cursor: pointer;
+}

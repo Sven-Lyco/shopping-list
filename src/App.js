@@ -2,7 +2,7 @@ import "./app.css";
 import "./components/list.css";
 import Header from "./components/Header";
 import List from "./components/List";
-import AddItem from "./components/AddItem";
+//import AddItem from "./components/AddItem";
 import SearchBar from "./components/SearchBar";
 import SearchListItems from "./components/SearchListItems";
 import { useState, useEffect } from "react";
@@ -10,8 +10,6 @@ import { nanoid } from "nanoid";
 
 import "./components/searchbar.css";
 import "./components/searchlistitems.css";
-
-//const { search } = require("fast-fuzzy");
 
 function App() {
   const [shoppingList, setShoppingList] = useState(loadFromLocal("items") ?? []);
@@ -76,7 +74,7 @@ function App() {
     <div className="app">
       <Header />
       <List className="list" items={shoppingList} onDeleteItem={handleDeleteItem} />
-      <AddItem onAddItem={handleAddItem} />
+      {/*<AddItem onAddItem={handleAddItem} />*/}
       <SearchBar handleSearch={setSearchTerm} />
       {searchTerm && (
         <SearchListItems
