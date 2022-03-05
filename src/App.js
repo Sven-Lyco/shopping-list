@@ -1,31 +1,34 @@
-import "./App.css";
-import "./components/List.css";
-import DataBase from "./db";
+import "./app.css";
+import "./components/list.css";
 import Header from "./components/Header";
 import List from "./components/List";
 import AddItem from "./components/AddItem";
+import SearchBar from "./components/SearchBar";
+import SearchListItems from "./components/SearchListItems";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 
+import "./components/searchbar.css";
+import "./components/searchlistitems.css";
+
+//const { search } = require("fast-fuzzy");
+
 function App() {
-  const [shoppingList, setShoppingList] = useState(
-    loadFromLocal("items") ?? DataBase
-  );
-  const [apfel7, setApfel7] = useState([]);
+  const [shoppingList, setShoppingList] = useState(loadFromLocal("items") ?? []);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [shoppingItems, setShoppingItems] = useState([]);
 
   useEffect(() => {
-    async function loadNewItems() {
+    loadShoppingItems();
+    async function loadShoppingItems() {
       try {
-        const response = await fetch(
-          "https://fetch-me.vercel.app/api/shopping/items"
-        );
+        const response = await fetch("https://fetch-me.vercel.app/api/shopping/items");
         const data = await response.json();
-        setApfel7(data);
+        setShoppingItems(data.data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
-    loadNewItems();
   }, []);
 
   useEffect(() => {
@@ -59,16 +62,16 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="app">
       <Header />
-      <List
-        className="List"
-        items={shoppingList}
-        onDeleteItem={handleDeleteItem}
-      />
+      <List className="list" items={shoppingList} onDeleteItem={handleDeleteItem} />
       <AddItem onAddItem={handleAddItem} />
+      <SearchBar handleSearch={setSearchTerm} />
+      {searchTerm && <SearchListItems searchInput={searchTerm} items={shoppingItems} />}
     </div>
   );
 }
 
 export default App;
+
+//

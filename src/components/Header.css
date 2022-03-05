@@ -1,6 +1,6 @@
-.Header {
-  background-color: cadetblue;
-  text-decoration: underline;
+.header {
+  background-color: #212529;
+  color: #f8f9fa;
   text-align: center;
   font-size: x-large;
   padding: 10px;

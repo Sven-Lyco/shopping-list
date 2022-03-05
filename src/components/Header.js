@@ -1,5 +1,5 @@
-import "./Header.css";
+import "./header.css";
 
 export default function Header() {
-  return <header className="Header">Shopping List</header>;
+  return <header className="header">Shopping List</header>;
 }
