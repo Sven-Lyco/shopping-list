@@ -67,7 +67,7 @@ function App() {
       <List className="list" items={shoppingList} onDeleteItem={handleDeleteItem} />
       <AddItem onAddItem={handleAddItem} />
       <SearchBar handleSearch={setSearchTerm} />
-      <SearchListItems searchInput={searchTerm} items={shoppingItems} />
+      {searchTerm && <SearchListItems searchInput={searchTerm} items={shoppingItems} />}
     </div>
   );
 }
