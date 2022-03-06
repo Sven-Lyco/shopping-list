@@ -1,21 +1,13 @@
 import "./searchbar.css";
-import { useState } from "react";
 
-export default function SearchBar({ handleSearch }) {
-  const [title, setTitle] = useState("");
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    handleSearch(title);
-    setTitle("");
-  }
-
+export default function SearchBar({ handleSearch, searchInput }) {
   return (
-    <form className="searchbar-container" onSubmit={handleSubmit}>
+    <form className="searchbar-container">
       <input
         type="text"
         className="searchbar"
         placeholder="Search..."
+        value={searchInput}
         onChange={(event) => {
           handleSearch(event.target.value);
         }}

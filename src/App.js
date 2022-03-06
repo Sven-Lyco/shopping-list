@@ -3,13 +3,11 @@ import "./components/list.css";
 import Header from "./components/Header";
 import List from "./components/List";
 import AddItem from "./components/AddItem";
+//import Search from "./components/Search";
 import SearchBar from "./components/SearchBar";
 import SearchListItems from "./components/SearchListItems";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
-
-import "./components/searchbar.css";
-import "./components/searchlistitems.css";
 
 function App() {
   const [shoppingList, setShoppingList] = useState(loadFromLocal("items") ?? []);
@@ -56,9 +54,13 @@ function App() {
       category: shoppingItems.category,
       name: { en: shoppingItems.name.en, de: shoppingItems.name.de },
     };
-    console.log(shoppingItems);
-    setShoppingList([...shoppingList, newSearchedItem]);
-    setSearchTerm("");
+    if (shoppingList.map((item) => item._id).includes(newSearchedItem._id)) {
+      alert("You already added the item");
+      setSearchTerm("");
+    } else {
+      setSearchTerm("");
+      setShoppingList([...shoppingList, newSearchedItem]);
+    }
   }
 
   function handleAddItem(name) {
@@ -76,7 +78,13 @@ function App() {
       <Header />
       <List className="list" items={shoppingList} onDeleteItem={handleDeleteItem} />
       <AddItem onAddItem={handleAddItem} />
-      <SearchBar handleSearch={setSearchTerm} />
+      {/* <Search
+        handleSearch={setSearchTerm}
+        searchInput={searchTerm}
+        items={shoppingItems}
+        onAddSearchedItem={handleAddSearchedItem}
+      /> */}
+      <SearchBar handleSearch={setSearchTerm} searchInput={searchTerm} />
       {searchTerm && (
         <SearchListItems
           searchInput={searchTerm}
@@ -89,5 +97,3 @@ function App() {
 }
 
 export default App;
-
-//
