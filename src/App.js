@@ -8,11 +8,6 @@ import SearchListItems from "./components/SearchListItems";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 
-import "./components/searchbar.css";
-import "./components/searchlistitems.css";
-
-//const { search } = require("fast-fuzzy");
-
 function App() {
   const [shoppingList, setShoppingList] = useState(loadFromLocal("items") ?? []);
   const [searchTerm, setSearchTerm] = useState("");
@@ -61,17 +56,37 @@ function App() {
     setShoppingList([...shoppingList, newItem]);
   }
 
+  function handleAddSearchedItem(shoppingItems) {
+    const newSearchedItem = {
+      _id: shoppingItems._id,
+      _type: shoppingItems._type,
+      category: shoppingItems.category,
+      name: { en: shoppingItems.name.en, de: shoppingItems.name.de },
+    };
+    if (shoppingList.map((item) => item._id).includes(newSearchedItem._id)) {
+      alert("You already added the item");
+      setSearchTerm("");
+    } else {
+      setSearchTerm("");
+      setShoppingList([...shoppingList, newSearchedItem]);
+    }
+  }
+
   return (
     <div className="app">
       <Header />
       <List className="list" items={shoppingList} onDeleteItem={handleDeleteItem} />
       <AddItem onAddItem={handleAddItem} />
-      <SearchBar handleSearch={setSearchTerm} />
-      {searchTerm && <SearchListItems searchInput={searchTerm} items={shoppingItems} />}
+      <SearchBar handleSearch={setSearchTerm} searchInput={searchTerm} />
+      {searchTerm && (
+        <SearchListItems
+          searchInput={searchTerm}
+          items={shoppingItems}
+          onAddSearchedItem={handleAddSearchedItem}
+        />
+      )}
     </div>
   );
 }
 
 export default App;
-
-//

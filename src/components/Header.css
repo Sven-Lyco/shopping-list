@@ -1,7 +1,8 @@
 .header {
-  background-color: #212529;
+  background-color: #2ec4b6;
   color: #f8f9fa;
   text-align: center;
-  font-size: x-large;
+  font-size: xx-large;
+  font-weight: bolder;
   padding: 10px;
 }
