@@ -5,13 +5,9 @@ export default function SearchListItems({ searchInput, items, onAddSearchedItem 
     <ul className="search-list">
       {items
         .filter((item) => {
-          if (searchInput === "") {
-            return item;
-          } else if (item.name.en.toLowerCase().includes(searchInput.toLowerCase())) {
-            return item;
-          }
-          return "";
+          return item.name.en.toLowerCase().includes(searchInput.toLowerCase());
         })
+
         .map((item) => (
           <li
             className="search-list-item"

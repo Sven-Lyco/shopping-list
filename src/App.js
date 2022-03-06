@@ -3,7 +3,6 @@ import "./components/list.css";
 import Header from "./components/Header";
 import List from "./components/List";
 import AddItem from "./components/AddItem";
-//import Search from "./components/Search";
 import SearchBar from "./components/SearchBar";
 import SearchListItems from "./components/SearchListItems";
 import { useState, useEffect } from "react";
@@ -47,6 +46,16 @@ function App() {
     setShoppingList(shoppingList.filter((item) => item._id !== ItemId));
   }
 
+  function handleAddItem(name) {
+    const newItem = {
+      _id: nanoid(),
+      _type: "shopping.item",
+      category: { _type: "ref", _ref: "c2hvcHBpbmcuY2F0ZWdvcnk6MA==" },
+      name: { en: name, de: "" },
+    };
+    setShoppingList([...shoppingList, newItem]);
+  }
+
   function handleAddSearchedItem(shoppingItems) {
     const newSearchedItem = {
       _id: shoppingItems._id,
@@ -63,27 +72,11 @@ function App() {
     }
   }
 
-  function handleAddItem(name) {
-    const newItem = {
-      _id: nanoid(),
-      _type: "shopping.item",
-      category: { _type: "ref", _ref: "c2hvcHBpbmcuY2F0ZWdvcnk6MA==" },
-      name: { en: name, de: "" },
-    };
-    setShoppingList([...shoppingList, newItem]);
-  }
-
   return (
     <div className="app">
       <Header />
       <List className="list" items={shoppingList} onDeleteItem={handleDeleteItem} />
       <AddItem onAddItem={handleAddItem} />
-      {/* <Search
-        handleSearch={setSearchTerm}
-        searchInput={searchTerm}
-        items={shoppingItems}
-        onAddSearchedItem={handleAddSearchedItem}
-      /> */}
       <SearchBar handleSearch={setSearchTerm} searchInput={searchTerm} />
       {searchTerm && (
         <SearchListItems
