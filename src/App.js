@@ -1,5 +1,4 @@
 import "./App.css";
-import "./components/List1.css";
 import Header from "./components/Header";
 import List from "./components/List";
 import AddItem from "./components/AddItem";
@@ -31,11 +30,27 @@ function App() {
     saveToLocal("items", shoppingList);
   }, [shoppingList]);
 
-  function handleDeleteItem(ItemId) {
+  return (
+    <div className="App">
+      <Header />
+      <List shoppingList={shoppingList} onDeleteItem={deleteItem} />
+      <AddItem onAddItem={addItem} />
+      <SearchBar onSearch={handleSearch} searchTerm={searchTerm} />
+      {searchTerm && (
+        <SearchListItems
+          searchTerm={searchTerm}
+          shoppingItems={shoppingItems}
+          onAddSearchedItem={addSearchedItem}
+        />
+      )}
+    </div>
+  );
+
+  function deleteItem(ItemId) {
     setShoppingList(shoppingList.filter((item) => item._id !== ItemId));
   }
 
-  function handleAddItem(name) {
+  function addItem(name) {
     const newItem = {
       _id: nanoid(),
       _type: "shopping.item",
@@ -58,22 +73,6 @@ function App() {
   function handleSearch(title) {
     setSearchTerm(title);
   }
-
-  return (
-    <div className="App">
-      <Header />
-      <List shoppingList={shoppingList} onDeleteItem={handleDeleteItem} />
-      <AddItem onAddItem={handleAddItem} />
-      <SearchBar onSearch={handleSearch} searchTerm={searchTerm} />
-      {searchTerm && (
-        <SearchListItems
-          searchTerm={searchTerm}
-          shoppingItems={shoppingItems}
-          onAddSearchedItem={addSearchedItem}
-        />
-      )}
-    </div>
-  );
 }
 
 export default App;

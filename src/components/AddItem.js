@@ -12,7 +12,7 @@ export default function AddItem({ onAddItem }) {
 
   return (
     <form className="Add" onSubmit={handleSubmit}>
-      <label htmlFor="Add-Item" className="add-input-text">
+      <label htmlFor="Add-Item" className="Add-Input-Text">
         What do you want to buy?:
       </label>
       <input

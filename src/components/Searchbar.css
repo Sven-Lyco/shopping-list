@@ -1,3 +1,11 @@
+.Searchbar-Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  border-bottom: 2px solid #2ec4b6;
+}
+
 .Searchbar {
   font-size: large;
   width: 95vw;
@@ -6,19 +14,11 @@
   margin: 10px 0px;
   border: 2px solid #2ec4b6;
 }
-.Searchbar-Container {
-  display: flex;
-  justify-content: center;
-  width: 100vw;
-  border-bottom: 2px solid #2ec4b6;
-}
 
 .Search-Input-Text {
-  display: block;
   color: black;
   margin: 0;
   padding: 10px;
   width: 100vw;
   text-align: center;
-  border-top: 2px solid #2ec4b6;
 }
