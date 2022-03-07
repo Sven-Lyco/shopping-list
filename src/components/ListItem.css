@@ -1,10 +1,10 @@
-.List-Item {
+.Listitem {
   background-color: #cbf3f0;
   border: 1px solid #cbf3f0;
   border-radius: 5px;
   padding: 3px;
 }
 
-.List-Item:hover {
+.Listitem:hover {
   cursor: pointer;
 }

@@ -1,7 +1,8 @@
-.Searchbar-Container {
+.Searchbar__Container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100vw;
   border-bottom: 2px solid #2ec4b6;
 }
@@ -15,7 +16,7 @@
   border: 2px solid #2ec4b6;
 }
 
-.Search-Input-Text {
+.Search__Text {
   color: black;
   margin: 0;
   padding: 10px;

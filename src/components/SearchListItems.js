@@ -8,7 +8,7 @@ export default function SearchListItems({ searchTerm, shoppingItems, onAddSearch
     <ul className="Search-List">
       {filteredItems.map((item) => (
         <li
-          className="Search-List-Item"
+          className="Search-List__Item"
           key={item._id}
           onClick={() => {
             onAddSearchedItem(item);

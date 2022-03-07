@@ -6,7 +6,7 @@
   border-top: 2px solid #2ec4b6;
 }
 
-.Add-Input-Text {
+.Add-Text {
   display: block;
   color: black;
   margin: 0;
@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-.Add-Input {
+.Add-Inputfield {
   font-size: large;
   width: 80vw;
   border-radius: 10px;
@@ -24,7 +24,7 @@
   border: 2px solid #2ec4b6;
 }
 
-.Add-Item-Button {
+.Add-Button {
   font-size: large;
   background-color: #2ec4b6;
   border-radius: 10px;
