@@ -1,5 +1,4 @@
-import "./app.css";
-import "./components/list.css";
+import "./App.css";
 import Header from "./components/Header";
 import List from "./components/List";
 import AddItem from "./components/AddItem";
@@ -7,6 +6,7 @@ import SearchBar from "./components/SearchBar";
 import SearchListItems from "./components/SearchListItems";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
+import { loadFromLocal, saveToLocal } from "./lib/localStorage";
 
 function App() {
   const [shoppingList, setShoppingList] = useState(loadFromLocal("items") ?? []);
@@ -30,23 +30,27 @@ function App() {
     saveToLocal("items", shoppingList);
   }, [shoppingList]);
 
-  function loadFromLocal(key) {
-    try {
-      return JSON.parse(localStorage.getItem(key));
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  return (
+    <div className="App">
+      <Header />
+      <List shoppingList={shoppingList} onDeleteItem={deleteItem} />
+      <AddItem onAddItem={addItem} />
+      <SearchBar onSearch={handleSearch} searchTerm={searchTerm} />
+      {searchTerm && (
+        <SearchListItems
+          searchTerm={searchTerm}
+          shoppingItems={shoppingItems}
+          onAddSearchedItem={addSearchedItem}
+        />
+      )}
+    </div>
+  );
 
-  function saveToLocal(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
-  }
-
-  function handleDeleteItem(ItemId) {
+  function deleteItem(ItemId) {
     setShoppingList(shoppingList.filter((item) => item._id !== ItemId));
   }
 
-  function handleAddItem(name) {
+  function addItem(name) {
     const newItem = {
       _id: nanoid(),
       _type: "shopping.item",
@@ -56,37 +60,19 @@ function App() {
     setShoppingList([...shoppingList, newItem]);
   }
 
-  function handleAddSearchedItem(shoppingItems) {
-    const newSearchedItem = {
-      _id: shoppingItems._id,
-      _type: shoppingItems._type,
-      category: shoppingItems.category,
-      name: { en: shoppingItems.name.en, de: shoppingItems.name.de },
-    };
-    if (shoppingList.map((item) => item._id).includes(newSearchedItem._id)) {
+  function addSearchedItem(shoppingItem) {
+    if (shoppingList.find((item) => item._id === shoppingItem._id)) {
       alert("You already added the item");
       setSearchTerm("");
     } else {
       setSearchTerm("");
-      setShoppingList([...shoppingList, newSearchedItem]);
+      setShoppingList([...shoppingList, shoppingItem]);
     }
   }
 
-  return (
-    <div className="app">
-      <Header />
-      <List className="list" items={shoppingList} onDeleteItem={handleDeleteItem} />
-      <AddItem onAddItem={handleAddItem} />
-      <SearchBar handleSearch={setSearchTerm} searchInput={searchTerm} />
-      {searchTerm && (
-        <SearchListItems
-          searchInput={searchTerm}
-          items={shoppingItems}
-          onAddSearchedItem={handleAddSearchedItem}
-        />
-      )}
-    </div>
-  );
+  function handleSearch(title) {
+    setSearchTerm(title);
+  }
 }
 
 export default App;

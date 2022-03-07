@@ -1,17 +1,21 @@
-import "./searchbar.css";
+import "./Searchbar.css";
 
-export default function SearchBar({ handleSearch, searchInput }) {
+export default function SearchBar({ onSearch, searchTerm }) {
   return (
-    <form className="searchbar-container">
+    <form className="Searchbar-Container" onSubmit={(event) => event.preventDefault()}>
+      <label htmlFor="search-item" className="Search-Input-Text">
+        Search for articles:
+      </label>
       <input
+        id="search-item"
         type="text"
-        className="searchbar"
+        className="Searchbar"
         placeholder="Search..."
-        value={searchInput}
+        value={searchTerm}
         onChange={(event) => {
-          handleSearch(event.target.value);
+          onSearch(event.target.value);
         }}
-      ></input>
+      />
     </form>
   );
 }
