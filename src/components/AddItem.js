@@ -1,4 +1,4 @@
-import "./additem.css";
+import "./AddItem1.css";
 import { useState } from "react";
 
 export default function AddItem({ onAddItem }) {
@@ -11,19 +11,19 @@ export default function AddItem({ onAddItem }) {
   }
 
   return (
-    <form className="add" onSubmit={handleSubmit}>
-      <label htmlFor="add-item" className="add-input-text">
+    <form className="Add" onSubmit={handleSubmit}>
+      <label htmlFor="Add-Item" className="add-input-text">
         What do you want to buy?:
       </label>
       <input
         id="add-item"
-        className="add-input"
+        className="Add-Input"
         type="text"
         placeholder="Add Item..."
         value={title}
         onChange={(event) => setTitle(event.target.value)}
       />
-      <button className="add-item-button">Add</button>
+      <button className="Add-Item-Button">Add</button>
     </form>
   );
 }

@@ -1,5 +1,5 @@
-import "./app.css";
-import "./components/list.css";
+import "./App1.css";
+import "./components/List1.css";
 import Header from "./components/Header";
 import List from "./components/List";
 import AddItem from "./components/AddItem";
