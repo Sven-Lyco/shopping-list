@@ -45,33 +45,31 @@ function App() {
     setShoppingList([...shoppingList, newItem]);
   }
 
-  function handleAddSearchedItem(shoppingItems) {
-    const newSearchedItem = {
-      _id: shoppingItems._id,
-      _type: shoppingItems._type,
-      category: shoppingItems.category,
-      name: { en: shoppingItems.name.en, de: shoppingItems.name.de },
-    };
-    if (shoppingList.map((item) => item._id).includes(newSearchedItem._id)) {
+  function addSearchedItem(shoppingItem) {
+    if (shoppingList.find((item) => item._id === shoppingItem._id)) {
       alert("You already added the item");
       setSearchTerm("");
     } else {
       setSearchTerm("");
-      setShoppingList([...shoppingList, newSearchedItem]);
+      setShoppingList([...shoppingList, shoppingItem]);
     }
+  }
+
+  function handleSearch(title) {
+    setSearchTerm(title);
   }
 
   return (
     <div className="app">
       <Header />
-      <List className="list" items={shoppingList} onDeleteItem={handleDeleteItem} />
+      <List shoppingList={shoppingList} onDeleteItem={handleDeleteItem} />
       <AddItem onAddItem={handleAddItem} />
-      <SearchBar handleSearch={setSearchTerm} searchInput={searchTerm} />
+      <SearchBar onSearch={handleSearch} searchTerm={searchTerm} />
       {searchTerm && (
         <SearchListItems
-          searchInput={searchTerm}
-          items={shoppingItems}
-          onAddSearchedItem={handleAddSearchedItem}
+          searchTerm={searchTerm}
+          shoppingItems={shoppingItems}
+          onAddSearchedItem={addSearchedItem}
         />
       )}
     </div>

@@ -2,10 +2,10 @@
 import "./list.css";
 import ListItem from "./ListItem";
 
-export default function List({ items, onDeleteItem }) {
+export default function List({ shoppingList, onDeleteItem }) {
   return (
     <ul role="list" className="list">
-      {items.map((item) => {
+      {shoppingList.map((item) => {
         return <ListItem item={item} key={item._id} deleteItem={onDeleteItem} />;
       })}
     </ul>
