@@ -7,6 +7,7 @@ import SearchBar from "./components/SearchBar";
 import SearchListItems from "./components/SearchListItems";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
+import { loadFromLocal, saveToLocal } from "./lib/localStorage";
 
 function App() {
   const [shoppingList, setShoppingList] = useState(loadFromLocal("items") ?? []);
@@ -29,18 +30,6 @@ function App() {
   useEffect(() => {
     saveToLocal("items", shoppingList);
   }, [shoppingList]);
-
-  function loadFromLocal(key) {
-    try {
-      return JSON.parse(localStorage.getItem(key));
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  function saveToLocal(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
-  }
 
   function handleDeleteItem(ItemId) {
     setShoppingList(shoppingList.filter((item) => item._id !== ItemId));
