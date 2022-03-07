@@ -7,9 +7,12 @@ import SearchBar from "./components/SearchBar";
 import SearchListItems from "./components/SearchListItems";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
+import { saveToLocal, loadFromLocal } from "./lib/localStorage";
 
 function App() {
-  const [shoppingList, setShoppingList] = useState(loadFromLocal("items") ?? []);
+  const [shoppingList, setShoppingList] = useState(
+    loadFromLocal("items") ?? []
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [shoppingItems, setShoppingItems] = useState([]);
 
@@ -17,7 +20,9 @@ function App() {
     loadShoppingItems();
     async function loadShoppingItems() {
       try {
-        const response = await fetch("https://fetch-me.vercel.app/api/shopping/items");
+        const response = await fetch(
+          "https://fetch-me.vercel.app/api/shopping/items"
+        );
         const data = await response.json();
         setShoppingItems(data.data);
       } catch (error) {
@@ -30,17 +35,25 @@ function App() {
     saveToLocal("items", shoppingList);
   }, [shoppingList]);
 
-  function loadFromLocal(key) {
-    try {
-      return JSON.parse(localStorage.getItem(key));
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  function saveToLocal(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
-  }
+  return (
+    <div className="app">
+      <Header />
+      <List
+        className="list"
+        items={shoppingList}
+        onDeleteItem={handleDeleteItem}
+      />
+      <AddItem onAddItem={handleAddItem} />
+      <SearchBar onSearch={handleSearch} searchInput={searchTerm} />
+      {searchTerm && (
+        <SearchListItems
+          searchInput={searchTerm}
+          items={shoppingItems}
+          onAddSearchedItem={handleAddSearchedItem}
+        />
+      )}
+    </div>
+  );
 
   function handleDeleteItem(ItemId) {
     setShoppingList(shoppingList.filter((item) => item._id !== ItemId));
@@ -56,37 +69,25 @@ function App() {
     setShoppingList([...shoppingList, newItem]);
   }
 
-  function handleAddSearchedItem(shoppingItems) {
-    const newSearchedItem = {
-      _id: shoppingItems._id,
-      _type: shoppingItems._type,
-      category: shoppingItems.category,
-      name: { en: shoppingItems.name.en, de: shoppingItems.name.de },
-    };
-    if (shoppingList.map((item) => item._id).includes(newSearchedItem._id)) {
+  function handleAddSearchedItem(shoppingItem) {
+    // const newSearchedItem = {
+    //   _id: shoppingItem._id,
+    //   _type: shoppingItem._type,
+    //   category: shoppingItem.category,
+    //   name: { en: shoppingItem.name.en, de: shoppingItem.name.de },
+    // };
+    if (shoppingList.find((item) => item._id === shoppingItem._id)) {
       alert("You already added the item");
       setSearchTerm("");
     } else {
       setSearchTerm("");
-      setShoppingList([...shoppingList, newSearchedItem]);
+      setShoppingList([...shoppingList, shoppingItem]);
     }
   }
 
-  return (
-    <div className="app">
-      <Header />
-      <List className="list" items={shoppingList} onDeleteItem={handleDeleteItem} />
-      <AddItem onAddItem={handleAddItem} />
-      <SearchBar handleSearch={setSearchTerm} searchInput={searchTerm} />
-      {searchTerm && (
-        <SearchListItems
-          searchInput={searchTerm}
-          items={shoppingItems}
-          onAddSearchedItem={handleAddSearchedItem}
-        />
-      )}
-    </div>
-  );
+  function handleSearch(title) {
+    setSearchTerm(title);
+  }
 }
 
 export default App;
