@@ -7,13 +7,13 @@
   gap: 10px;
 }
 
-.Search-List-Item {
+.Search-List__Item {
   background-color: #ffbf69;
   border: 1px solid #ffbf69;
   border-radius: 5px;
   padding: 3px;
 }
 
-.Search-List-Item:hover {
+.Search-List__Item:hover {
   cursor: pointer;
 }

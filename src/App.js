@@ -31,7 +31,7 @@ function App() {
   }, [shoppingList]);
 
   return (
-    <div className="App">
+    <div className="App__Container">
       <Header />
       <List shoppingList={shoppingList} onDeleteItem={deleteItem} />
       <AddItem onAddItem={addItem} />
