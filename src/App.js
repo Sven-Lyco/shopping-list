@@ -1,4 +1,4 @@
-import "./App1.css";
+import "./App.css";
 import "./components/List1.css";
 import Header from "./components/Header";
 import List from "./components/List";
@@ -60,7 +60,7 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <div className="App">
       <Header />
       <List shoppingList={shoppingList} onDeleteItem={handleDeleteItem} />
       <AddItem onAddItem={handleAddItem} />

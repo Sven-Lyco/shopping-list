@@ -1,4 +1,4 @@
-import "./AddItem1.css";
+import "./AddItem.css";
 import { useState } from "react";
 
 export default function AddItem({ onAddItem }) {

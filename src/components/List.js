@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import "./List1.css";
+import "./List.css";
 import ListItem from "./ListItem";
 
 export default function List({ shoppingList, onDeleteItem }) {

@@ -1,4 +1,4 @@
-import "./ListItem1.css";
+import "./ListItem.css";
 
 export default function ListItem({ item, deleteItem }) {
   return (

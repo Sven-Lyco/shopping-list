@@ -1,4 +1,4 @@
-import "./SearchListItems1.css";
+import "./SearchListItems.css";
 
 export default function SearchListItems({ searchTerm, shoppingItems, onAddSearchedItem }) {
   const filteredItems = shoppingItems.filter((item) =>
