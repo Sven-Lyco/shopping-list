@@ -22,6 +22,7 @@ export default function AddItem({ onAddItem }) {
         placeholder="Add Item..."
         value={title}
         onChange={(event) => setTitle(event.target.value)}
+        required
       />
       <button className="Add-Button">Add</button>
     </form>
