@@ -1,15 +1,18 @@
 import "./App.css";
+
 import Header from "./components/Header";
 import List from "./components/List";
 import AddItem from "./components/AddItem";
 import SearchBar from "./components/SearchBar";
 import SearchListItems from "./components/SearchListItems";
+
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
-import { loadFromLocal, saveToLocal } from "./lib/localStorage";
+
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
-  const [shoppingList, setShoppingList] = useState(loadFromLocal("items") ?? []);
+  const [shoppingList, setShoppingList] = useLocalStorage("items", []);
   const [searchTerm, setSearchTerm] = useState("");
   const [shoppingItems, setShoppingItems] = useState([]);
 
@@ -25,10 +28,6 @@ function App() {
       }
     }
   }, []);
-
-  useEffect(() => {
-    saveToLocal("items", shoppingList);
-  }, [shoppingList]);
 
   return (
     <div className="App__Container">
