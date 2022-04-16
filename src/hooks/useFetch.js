@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 
-function useFetch(url) {
-  const [data, setData] = useState(null);
+export default function useFetch(url) {
+  const [shoppingItems, setShoppingItems] = useState([]);
 
-  async function fetchData() {
-    const response = await fetch(url);
-    const newData = await response.json();
-    if (response.status === 200) {
-      setData(newData);
-    } else {
-      console.error("Opps, something went wrong!");
+  useEffect(() => {
+    loadShoppingItems();
+    async function loadShoppingItems() {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setShoppingItems(data.data);
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }
+  }, [url]);
 
-  useEffect(() => fetchData(), []);
-
-  return [data, fetchData];
+  return { shoppingItems };
 }
-
-export default useFetch;
