@@ -1,0 +1,14 @@
+.Header {
+  background-color: #2ec4b6;
+  text-align: center;
+  padding: 10px;
+  width: 100vw;
+}
+
+.Header__title {
+  font-family: "Lobster", cursive;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  color: #f8f9fa;
+  margin: 0;
+}

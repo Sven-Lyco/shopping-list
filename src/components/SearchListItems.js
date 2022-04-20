@@ -1,19 +1,14 @@
-import "./searchlistitems.css";
+import "./SearchListItems.css";
 
-export default function SearchListItems({
-  searchInput,
-  items,
-  onAddSearchedItem,
-}) {
-  const filterdItems = items.filter((item) =>
-    item.name.en.toLowerCase().includes(searchInput.toLowerCase())
+export default function SearchListItems({ searchTerm, shoppingItems, onAddSearchedItem }) {
+  const filteredItems = shoppingItems.filter((item) =>
+    item.name.en.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   return (
-    <ul className="search-list">
-      {filterdItems.map((item) => (
+    <ul className="Search-List">
+      {filteredItems.map((item) => (
         <li
-          className="search-list-item"
+          className="Search-List__Item"
           key={item._id}
           onClick={() => {
             onAddSearchedItem(item);

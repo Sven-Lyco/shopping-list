@@ -1,21 +1,21 @@
-.add {
+.Add {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  border-top: 2px solid #2ec4b6;
 }
 
-.add-input-text {
+.Add-Text {
   display: block;
   color: black;
   margin: 0;
   padding: 10px;
   width: 100vw;
   text-align: center;
-  border-top: 2px solid #2ec4b6;
 }
 
-.add-input {
+.Add-Inputfield {
   font-size: large;
   width: 80vw;
   border-radius: 10px;
@@ -24,7 +24,7 @@
   border: 2px solid #2ec4b6;
 }
 
-.add-item-button {
+.Add-Button {
   font-size: large;
   background-color: #2ec4b6;
   border-radius: 10px;
