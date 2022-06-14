@@ -38,13 +38,17 @@ export default function App() {
   }
 
   function addItem(name) {
-    const newItem = {
-      _id: nanoid(),
-      _type: "shopping.item",
-      category: { _type: "ref", _ref: "c2hvcHBpbmcuY2F0ZWdvcnk6MA==" },
-      name: { en: name, de: "" },
-    };
-    setShoppingList([...shoppingList, newItem]);
+    if (shoppingList.find((item) => item.name.en.toLowerCase() === name.toLowerCase())) {
+      alert("You already added the item");
+    } else {
+      const newItem = {
+        _id: nanoid(),
+        _type: "shopping.item",
+        category: { _type: "ref", _ref: "c2hvcHBpbmcuY2F0ZWdvcnk6MA==" },
+        name: { en: name, de: "" },
+      };
+      setShoppingList([...shoppingList, newItem]);
+    }
   }
 
   function addSearchedItem(shoppingItem) {
@@ -58,6 +62,6 @@ export default function App() {
   }
 
   function handleSearch(title) {
-    setSearchTerm(title);
+    setSearchTerm(title.trim());
   }
 }
