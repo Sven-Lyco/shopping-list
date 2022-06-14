@@ -6,28 +6,16 @@ import AddItem from "./components/AddItem";
 import SearchBar from "./components/SearchBar";
 import SearchListItems from "./components/SearchListItems";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { nanoid } from "nanoid";
 
 import useLocalStorage from "./hooks/useLocalStorage";
+import useFetch from "./hooks/useFetch";
 
-function App() {
+export default function App() {
   const [shoppingList, setShoppingList] = useLocalStorage("items", []);
   const [searchTerm, setSearchTerm] = useState("");
-  const [shoppingItems, setShoppingItems] = useState([]);
-
-  useEffect(() => {
-    loadShoppingItems();
-    async function loadShoppingItems() {
-      try {
-        const response = await fetch("https://fetch-me.vercel.app/api/shopping/items");
-        const data = await response.json();
-        setShoppingItems(data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  }, []);
+  const [shoppingItems] = useFetch();
 
   return (
     <div className="App__Container">
@@ -46,7 +34,7 @@ function App() {
   );
 
   function deleteItem(ItemId) {
-    setShoppingList(shoppingList.filter((item) => item._id !== ItemId));
+    setShoppingList(shoppingList?.filter((item) => item._id !== ItemId));
   }
 
   function addItem(name) {
@@ -73,5 +61,3 @@ function App() {
     setSearchTerm(title);
   }
 }
-
-export default App;
